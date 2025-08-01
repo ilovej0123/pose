@@ -67,6 +67,7 @@
                     maxProb = parseFloat(prob);
                     detectedClass = prediction[i].className;
                 }
+		console.log("Detected:", detectedClass, "Probability:", maxProb);    
             }
 
             if (detectedClass === "drowsy" && maxProb > 0.9) {
