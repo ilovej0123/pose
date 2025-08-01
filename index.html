@@ -19,11 +19,17 @@
         const warningThreshold = 10;
 
         async function init() {
+            const alarmSound = document.getElementById("alarm-sound");
+	        alarmSound.play().then(() => {
+        	    alarmSound.pause();
+        	    alarmSound.currentTime = 0;
+            });	
+            
             const modelURL = URL + "model.json";
             const metadataURL = URL + "metadata.json";
             model = await tmPose.load(modelURL, metadataURL);
             maxPredictions = model.getTotalClasses();
-
+            
             const size = 300;
             webcam = new tmPose.Webcam(size, size, true);
             await webcam.setup();
