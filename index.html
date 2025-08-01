@@ -70,7 +70,7 @@
 		console.log("Detected:", detectedClass, "Probability:", maxProb);    
             }
 
-            if (detectedClass === "졸음" && maxProb > 0.9) {
+            if (detectedClass === "졸음" && maxProb > 0.8) {
                 drowsyCount++;
             } else {
                 drowsyCount = 0;
@@ -78,7 +78,10 @@
 
             if (drowsyCount >= warningThreshold) {
                 alert("졸음이 감지되었습니다! 깨어나세요!");
-                document.getElementById("alarm-sound").play();
+                const alarm = document.getElementById("alarm-sound");
+		alarm.play().catch((e) => {
+		        console.error("Audio play failed:", e);
+		});
                 drowsyCount = 0;
             }
 
